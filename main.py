@@ -2,6 +2,11 @@ import tkinter as tk
 
 root = tk.Tk()
 
+# A command to print something
+
+def print_something():
+    print("You clicked a button... but I don't know which one.")
+
 # Let's create a grid of buttons...
 
 rows = 3
@@ -14,7 +19,7 @@ for i in range(rows):
     for j in range(columns):
         # Create button
 
-        buttons[i][j] = tk.Button(text=f'{(i,j)}')
+        buttons[i][j] = tk.Button(text=f'{(i, j)}', command=print_something)
 
         # Place on grid
 
