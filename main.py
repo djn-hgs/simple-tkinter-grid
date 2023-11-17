@@ -2,10 +2,12 @@ import tkinter as tk
 
 root = tk.Tk()
 
+
 # A command to print something
 
 def print_something():
     print("You clicked a button... but I don't know which one.")
+
 
 # Let's create a grid of buttons...
 
