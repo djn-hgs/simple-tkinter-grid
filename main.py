@@ -16,8 +16,9 @@ class ButtonThatPrints(tk.Button):
 
         # super() is the button's parent class - in this case tk.Button
         # It needs to grab all the initialisation that a standard button would have
+        # Notice that I am hard-coding that the button's label is its location
 
-        super().__init__()
+        super().__init__(text=f'{(button_row, button_column)}')
 
         # Store the row and column in the button's properties
 
