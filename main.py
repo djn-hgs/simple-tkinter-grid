@@ -71,7 +71,7 @@ for i in range(rows):
 
         buttons[i][j].grid(row=i, column=j, sticky='news')
 
-# Describe rows and columns - these will fill the screen
+# Describe rows and columns - these will fill the screen root
 
 for row in range(rows):
     root.rowconfigure(row, weight=1)
