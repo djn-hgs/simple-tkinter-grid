@@ -3,16 +3,24 @@ import tkinter as tk
 root = tk.Tk()
 
 
-# A command to print something
+# A button to print something
+
+class button_that_prints(tk.Button):
+    def __init__(self, row, column):
+        super().__init__()
+        self.row = row
+        self.column = column
+
+    def clicked(self):
+        print(f"You clicked a button {(self.row, self.column)}... but I don't know which one.")
 
 def print_something():
-    print("You clicked a button... but I don't know which one.")
-
+    print('Bang')
 
 # Let's create a grid of buttons...
 
-rows = 3
-columns = 3
+rows = 8
+columns = 8
 
 buttons = {}
 
@@ -21,7 +29,11 @@ for i in range(rows):
     for j in range(columns):
         # Create button
 
-        buttons[i][j] = tk.Button(text=f'{(i, j)}', command=print_something)
+        new_button = button_that_prints(row=i, column=j)
+
+        new_button.configure(command=new_button.clicked)
+
+        buttons[i][j] = new_button
 
         # Place on grid
 
