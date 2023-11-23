@@ -12,22 +12,24 @@ class ButtonThatPrints(tk.Button):
     # Our __init__ has parameters for the button's row and column
     # I've kept it simple, so any config will have to be done via "configure"
     # (See later code)
-    def __init__(self, button_row, button_column):
+    def __init__(self, master, button_row, button_column, label_var):
 
         # super() is the button's parent class - in this case tk.Button
         # It needs to grab all the initialisation that a standard button would have
         # Notice that I am hard-coding that the button's label is its location
 
-        super().__init__(text=f'{(button_row, button_column)}')
+        super().__init__(master, text=f'{(button_row, button_column)}')
 
         # Store the row and column in the button's properties
 
+        self.label_var = label_var
         self.row = button_row
         self.column = button_column
 
     # This is the button's own, personal "clicked" method
 
     def clicked(self):
+        self.label_var.set(f"You clicked button {(self.row, self.column)}.")
         print(f"You clicked button {(self.row, self.column)}.")
 
 # We don't need this any more
@@ -40,8 +42,8 @@ class ButtonThatPrints(tk.Button):
 
 # I used variables to prove that the grid can have any size
 
-rows = 8
-columns = 8
+rows = 4
+columns = 7
 
 # Showing off by storing the buttons in a dictionary of dictionaries
 # (why not? it's fun)
@@ -49,6 +51,12 @@ columns = 8
 # The rows
 buttons = {}
 
+label_text = tk.StringVar(root)
+label_text.set("Whatever you want it to say I dunno")
+
+result_label = tk.Label(root, textvariable=label_text)
+
+result_label.grid(row= rows, column=0, columnspan=columns)
 for i in range(rows):
 
     # The cells in each row
@@ -57,7 +65,7 @@ for i in range(rows):
     for j in range(columns):
         # Create button and pass through its location
 
-        new_button = ButtonThatPrints(button_row=i, button_column=j)
+        new_button = ButtonThatPrints(root, button_row=i, button_column=j, label_var=label_text)
 
         # We then pass the button's own ButtonThatPrints.clicked() method as its own comman
         new_button.configure(command=new_button.clicked)
@@ -73,6 +81,9 @@ for i in range(rows):
         buttons[i][j].grid(row=i, column=j, sticky='news')
 
 # Describe rows and columns - these will fill the screen root
+
+
+
 
 for row in range(rows):
     root.rowconfigure(row, weight=1)
